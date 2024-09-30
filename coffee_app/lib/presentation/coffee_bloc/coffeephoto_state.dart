@@ -15,11 +15,20 @@ class CoffeePhotoLoading extends CoffeePhotoState {
   const CoffeePhotoLoading();
 }
 
+class CoffeePhotoSaving extends CoffeePhotoState {
+  const CoffeePhotoSaving();
+}
+
+
 class CoffeePhotoLoaded extends CoffeePhotoState{
   const CoffeePhotoLoaded(this.coffeePhoto);
   final CoffeeModel coffeePhoto;
   @override
   List<Object> get props => [coffeePhoto];
+}
+
+class CoffeePhotoSaveSuccess extends CoffeePhotoState{
+  const CoffeePhotoSaveSuccess();
 }
 
 class CoffeePhotoError extends CoffeePhotoState{

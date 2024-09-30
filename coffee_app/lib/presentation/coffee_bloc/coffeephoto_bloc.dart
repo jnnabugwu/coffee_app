@@ -1,27 +1,46 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:coffee_app/domain/repositories/coffee_repository.dart'; 
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-
-import 'package:coffee_app/data/coffee_remote_datasource.dart';
 import 'package:coffee_app/models/coffee.dart';
 
 part 'coffeephoto_event.dart';
 part 'coffeephoto_state.dart';
 
 class CoffeePhotoBloc extends Bloc<CoffeePhotoEvent, CoffeePhotoState> {
+  final CoffeeRepository _coffeeRepository;  
 
-  final CoffeeRemoteDataSource _dataSource;
+  CoffeePhotoBloc(this._coffeeRepository) : super(const CoffeePhotoInitial()) {
+    on<GetCoffeePhotoEvent>(_getCoffeePhoto);
+    on<SaveFavorite>(_savePhoto);
+  }
 
+  Future<void> _getCoffeePhoto(GetCoffeePhotoEvent event, Emitter<CoffeePhotoState> emit) async {
+    try {
+      emit(const CoffeePhotoLoading());
+      var coffee = await _coffeeRepository.getCoffee();  
+      emit(CoffeePhotoLoaded(coffee!));
+    } catch (e) {
+      emit(CoffeePhotoError(e.toString()));
+    }
+  }
 
-  CoffeePhotoBloc(this._dataSource) : super(const CoffeePhotoInitial()) {
-    on<GetCoffeePhotoEvent>((event, emit) async {
-      try{
-        emit(const CoffeePhotoLoading());
-       var coffee = await _dataSource.getCoffee();
-        emit(CoffeePhotoLoaded(coffee));
-      } catch (e) {
-        emit(CoffeePhotoError(e.toString()));
+  Future<void> _savePhoto(SaveFavorite event, Emitter<CoffeePhotoState> emit) async {
+    try {
+      emit(const CoffeePhotoSaving());  
+      bool saved = await _coffeeRepository.saveCoffeeImage(event.coffee.file);  
+      if (saved) {
+        emit(const CoffeePhotoSaveSuccess());
+        Future.delayed(const Duration(seconds: 2));
+        var coffee = await _coffeeRepository.getCoffee();
+        emit(CoffeePhotoLoaded(coffee!));
+      } else {
+        emit(const CoffeePhotoError("Failed to save photo"));
       }
-    });
+    } catch (e) {
+      emit(CoffeePhotoError("Didn't save photo: ${e.toString()}"));
+    }
   }
 }

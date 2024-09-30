@@ -1,26 +1,29 @@
-import 'package:equatable/equatable.dart';
 
 
-class CoffeeModel extends Equatable {
+
+class CoffeeModel{
   final String file;
+  final int? id;
+  final String imgHash;
   
-  
-  const CoffeeModel({
+  CoffeeModel({
     required this.file,
+   this.id,
+    required this.imgHash
   });
   
   CoffeeModel.fromJson(Map<String,dynamic> json) : 
-  file = json['file'] as String;
+  file = json['file'] as String,
+  id = 0,
+  imgHash = "";
 
   Map<String, dynamic> toJson() {
     return {
-      'file': file
+      'file': file,
+      'id': id,
+      'imgHash': imgHash
     };
   }
-  
-  @override
-  List<Object?> get props => [file];
-
 }
 /// Im thinking this is going to be the photo 
 /// add something to hold favorites 

@@ -14,3 +14,8 @@ class GetCoffeePhotoEvent extends CoffeePhotoEvent{
   const GetCoffeePhotoEvent();
  
 }
+///what do i need: the coffee class
+class SaveFavorite extends CoffeePhotoEvent{
+  final CoffeeModel coffee;
+  const SaveFavorite(this.coffee);
+}
