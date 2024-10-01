@@ -14,15 +14,12 @@ class CoffeeRepositoryImpl implements CoffeeRepository{
   CoffeeRepositoryImpl(this._localDataSource);
 
   @override
-  Future<bool> deleteCoffeeImage(int id) {
-    // TODO: implement deleteCoffeeImage
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<CoffeeModel>> getAllCoffeeImages() {
-    // TODO: implement getAllCoffeeImages
-    throw UnimplementedError();
+    try {
+      return _localDataSource.getAllCoffeeImages();
+    } catch (e) {
+      throw 'Something went wrong $e';
+    }
   }
 
   @override

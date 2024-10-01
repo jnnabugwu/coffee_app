@@ -19,6 +19,10 @@ class CoffeePhotoSaving extends CoffeePhotoState {
   const CoffeePhotoSaving();
 }
 
+class CoffeeSavedPhotos extends CoffeePhotoState {
+  final List<CoffeeModel> savedPhotos;
+  const CoffeeSavedPhotos(this.savedPhotos);
+}
 
 class CoffeePhotoLoaded extends CoffeePhotoState{
   const CoffeePhotoLoaded(this.coffeePhoto);

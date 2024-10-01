@@ -7,6 +7,5 @@ abstract class CoffeeRepository {
   ///delete coffee
   Future<List<CoffeeModel>> getAllCoffeeImages();
   Future<bool> saveCoffeeImage(String imageUrl);
-  Future<bool> deleteCoffeeImage(int id);
   Future<CoffeeModel?> getCoffee();
 }

@@ -15,6 +15,7 @@ class CoffeePhotoBloc extends Bloc<CoffeePhotoEvent, CoffeePhotoState> {
   CoffeePhotoBloc(this._coffeeRepository) : super(const CoffeePhotoInitial()) {
     on<GetCoffeePhotoEvent>(_getCoffeePhoto);
     on<SaveFavorite>(_savePhoto);
+    on<GetSavedPhotos>(_getAllSavedPhotos);
   }
 
   Future<void> _getCoffeePhoto(GetCoffeePhotoEvent event, Emitter<CoffeePhotoState> emit) async {
@@ -43,4 +44,15 @@ class CoffeePhotoBloc extends Bloc<CoffeePhotoEvent, CoffeePhotoState> {
       emit(CoffeePhotoError("Didn't save photo: ${e.toString()}"));
     }
   }
+
+  Future<void> _getAllSavedPhotos(GetSavedPhotos event,Emitter<CoffeePhotoState> emit) async {
+      try {
+        emit(const CoffeePhotoSaving());
+        var savedPhotos = await _coffeeRepository.getAllCoffeeImages();
+        emit(CoffeeSavedPhotos(savedPhotos));
+      } catch (e) {
+        emit(const CoffeePhotoError('Couldnt bring in saved photos'));
+      }
+  }
+
 }

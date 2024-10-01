@@ -89,7 +89,7 @@ class DatabaseHelper {
   Future<List<CoffeeModel>> getCoffeeImages() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('coffee_images');
-
+    print('making list');
     return List.generate(maps.length, (i) {
       return CoffeeModel(
         id: maps[i]['id'],

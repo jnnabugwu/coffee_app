@@ -19,3 +19,7 @@ class SaveFavorite extends CoffeePhotoEvent{
   final CoffeeModel coffee;
   const SaveFavorite(this.coffee);
 }
+
+class GetSavedPhotos extends CoffeePhotoEvent{
+  const GetSavedPhotos();
+}
