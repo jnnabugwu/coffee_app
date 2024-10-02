@@ -20,7 +20,7 @@ class CoffeePhotoSaving extends CoffeePhotoState {
 }
 
 class CoffeeSavedPhotos extends CoffeePhotoState {
-  final List<CoffeeModel> savedPhotos;
+  final List<SavedCoffeeModel> savedPhotos;
   const CoffeeSavedPhotos(this.savedPhotos);
 }
 

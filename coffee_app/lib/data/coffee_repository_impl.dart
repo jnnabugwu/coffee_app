@@ -1,20 +1,21 @@
 import 'dart:io';
 
-import 'package:coffee_app/data/coffee_local_datasource.dart';
+import 'package:coffee_app/data/coffee_datasource.dart';
 import 'package:coffee_app/domain/repositories/coffee_repository.dart';
 import 'package:coffee_app/models/coffee.dart';
+import 'package:coffee_app/models/savedcoffee.dart';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path; 
 
 class CoffeeRepositoryImpl implements CoffeeRepository{
-  final CoffeeLocalDataSource _localDataSource;
-
+  final CoffeeDataSource _localDataSource;
+  
   CoffeeRepositoryImpl(this._localDataSource);
 
   @override
-  Future<List<CoffeeModel>> getAllCoffeeImages() {
+  Future<List<SavedCoffeeModel>> getAllCoffeeImages() {
     try {
       return _localDataSource.getAllCoffeeImages();
     } catch (e) {
@@ -44,7 +45,7 @@ class CoffeeRepositoryImpl implements CoffeeRepository{
       await imageFile.writeAsBytes(response.bodyBytes);
       String imageHash = await computeImageHash(imageFile);
 
-      final coffeeImage = CoffeeModel(
+      final coffeeImage = SavedCoffeeModel(
         file: filePath,
         imgHash: imageHash, 
       );  

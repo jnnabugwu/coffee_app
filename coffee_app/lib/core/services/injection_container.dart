@@ -1,5 +1,5 @@
 
-import 'package:coffee_app/data/coffee_local_datasource.dart';
+import 'package:coffee_app/data/coffee_datasource.dart';
 import 'package:coffee_app/data/coffee_repository_impl.dart';
 import 'package:coffee_app/domain/repositories/coffee_repository.dart';
 import 'package:coffee_app/presentation/coffee_bloc/coffeephoto_bloc.dart';
@@ -14,12 +14,12 @@ Future<void> init() async {
 
   // Repository
   sl.registerLazySingleton<CoffeeRepository>(
-    () => CoffeeRepositoryImpl(sl<CoffeeLocalDataSource>())
+    () => CoffeeRepositoryImpl(sl<CoffeeDataSource>())
   );
 
   // Data Source
-  sl.registerLazySingleton<CoffeeLocalDataSource>(
-    () => CoffeeLocalDataSourceImpl(sl<DatabaseHelper>())
+  sl.registerLazySingleton<CoffeeDataSource>(
+    () => CoffeeDataSourceImpl(sl<DatabaseHelper>())
   );
 
   // Database Helper

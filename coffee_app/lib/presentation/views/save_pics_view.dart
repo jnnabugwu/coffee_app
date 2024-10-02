@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:coffee_app/models/savedcoffee.dart';
 import 'package:coffee_app/presentation/coffee_bloc/coffeephoto_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,10 +38,10 @@ class SavedCoffeePicturesView extends StatelessWidget {
     );
   }
 
-  Widget _buildPhotoGrid(List<CoffeeModel> photos) {
+  Widget _buildPhotoGrid(List<SavedCoffeeModel> photos) {
     return GridView.builder(
-      padding: EdgeInsets.all(8),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      padding: const EdgeInsets.all(8),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
@@ -52,7 +53,7 @@ class SavedCoffeePicturesView extends StatelessWidget {
     );
   }
 
-  Widget _buildPhotoItem(CoffeeModel coffee) {
+  Widget _buildPhotoItem(SavedCoffeeModel coffee) {
     return Card(
       elevation: 3,
       child: Column(

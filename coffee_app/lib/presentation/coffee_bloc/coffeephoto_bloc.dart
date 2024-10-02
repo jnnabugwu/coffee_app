@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:coffee_app/domain/repositories/coffee_repository.dart'; 
+import 'package:coffee_app/domain/repositories/coffee_repository.dart';
+import 'package:coffee_app/models/savedcoffee.dart'; 
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:coffee_app/models/coffee.dart';

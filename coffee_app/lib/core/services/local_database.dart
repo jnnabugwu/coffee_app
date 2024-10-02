@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:coffee_app/models/coffee.dart';
+import 'package:coffee_app/models/savedcoffee.dart';
 import 'package:crypto/crypto.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -53,7 +54,7 @@ class DatabaseHelper {
     return result.isNotEmpty;
   }
 
-  Future<int> insertCoffeeImage(CoffeeModel coffeeImage) async {
+  Future<int> insertCoffeeImage(SavedCoffeeModel coffeeImage) async {
     final db = await database;
     var map = coffeeImage.toJson();
     map.remove('id');
@@ -72,7 +73,7 @@ class DatabaseHelper {
   final isDuplicate = await DatabaseHelper.instance.isImageDuplicate(imageHash);
 
   if (!isDuplicate) {
-    final coffeeImage = CoffeeModel(
+    final coffeeImage = SavedCoffeeModel(
       file: imagePath,
       imgHash: imageHash,
     );
@@ -83,15 +84,16 @@ class DatabaseHelper {
     // Delete the file we just saved as it's a duplicate
     await imageFile.delete();
     print('Duplicate image not saved: $name');
+    throw('Duplicate image not saved: $name');
   }
 }
 
-  Future<List<CoffeeModel>> getCoffeeImages() async {
+  Future<List<SavedCoffeeModel>> getCoffeeImages() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('coffee_images');
     print('making list');
     return List.generate(maps.length, (i) {
-      return CoffeeModel(
+      return SavedCoffeeModel(
         id: maps[i]['id'],
         file: maps[i]['file'],
         imgHash: maps[i]['imgHash'],
