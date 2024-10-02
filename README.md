@@ -1,9 +1,16 @@
 # coffee_app
  A coffee app that lets users save their favorite coffee 
 
-As a user, I should be able to:
-● Open the app and load a new coffee image from the network
-● Load a new coffee image if the current one is not my favorite
-● Save the current coffee image locally if I really like it, so I can access my
-favorite coffee images at any time, even if I don’t have internet access
-○ Make sure any loading/error states are handled correctly
+# coffee_app
+
+A new Flutter project.
+
+## Getting Started
+
+1. Run the app with flutter run
+
+2. a coffee photo should pop up with two buttons underneath (Save photo and Saved Photos)
+
+3. Click Saved Photos if you want to go to Saved photos 
+
+4. Once in Saved Photos click the refresh button to get the saved photos. 
