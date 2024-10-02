@@ -20,19 +20,21 @@ class CoffeeDataSourceImpl implements CoffeeDataSource {
     _httpClient = httpClient ?? http.Client();
 
   @override
+@override
 Future<CoffeeModel?> getCoffee() async {
-  final response = await http.get(Uri.parse(ApiConfig.randomCoffeeEndpoint));
+  final response = await _httpClient.get(Uri.parse(ApiConfig.randomCoffeeEndpoint));
 
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      if (jsonData != null && jsonData['file'] != null) {
-        return CoffeeModel.fromJson(jsonData);
-      } else {
-        return null; 
-      }
+  if (response.statusCode == 200) {
+    final jsonData = json.decode(response.body);
+    if (jsonData is Map<String, dynamic> && jsonData['file'] is String) {
+      
+      return CoffeeModel.fromJson(jsonData);
     } else {
-      throw Exception('Failed to load coffee data: ${response.statusCode}');
+      return null;
     }
+  } else {
+    throw Exception('Failed to load coffee data: ${response.statusCode}');
+  }
 }
 
    @override

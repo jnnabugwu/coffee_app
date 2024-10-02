@@ -9,7 +9,7 @@ import 'dart:io' as _i9;
 import 'dart:typed_data' as _i7;
 
 import 'package:coffee_app/core/services/local_database.dart' as _i8;
-import 'package:coffee_app/models/coffee.dart' as _i10;
+import 'package:coffee_app/models/savedcoffee.dart' as _i10;
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
@@ -338,7 +338,7 @@ class MockDatabaseHelper extends _i1.Mock implements _i8.DatabaseHelper {
       ) as _i4.Future<bool>);
 
   @override
-  _i4.Future<int> insertCoffeeImage(_i10.CoffeeModel? coffeeImage) =>
+  _i4.Future<int> insertCoffeeImage(_i10.SavedCoffeeModel? coffeeImage) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertCoffeeImage,
@@ -365,12 +365,13 @@ class MockDatabaseHelper extends _i1.Mock implements _i8.DatabaseHelper {
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<List<_i10.CoffeeModel>> getCoffeeImages() => (super.noSuchMethod(
+  _i4.Future<List<_i10.SavedCoffeeModel>> getCoffeeImages() =>
+      (super.noSuchMethod(
         Invocation.method(
           #getCoffeeImages,
           [],
         ),
-        returnValue:
-            _i4.Future<List<_i10.CoffeeModel>>.value(<_i10.CoffeeModel>[]),
-      ) as _i4.Future<List<_i10.CoffeeModel>>);
+        returnValue: _i4.Future<List<_i10.SavedCoffeeModel>>.value(
+            <_i10.SavedCoffeeModel>[]),
+      ) as _i4.Future<List<_i10.SavedCoffeeModel>>);
 }

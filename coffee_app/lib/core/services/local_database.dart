@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:coffee_app/models/coffee.dart';
 import 'package:coffee_app/models/savedcoffee.dart';
 import 'package:crypto/crypto.dart';
 import 'package:path/path.dart';
