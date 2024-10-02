@@ -10,4 +10,4 @@ A new Flutter project.
 
 3. Click Saved Photos if you want to go to Saved photos 
 
-4. Once in Saved Photos click the referesh button to get the saved photos. 
+4. Once in Saved Photos click the refresh button to get the saved photos. 
